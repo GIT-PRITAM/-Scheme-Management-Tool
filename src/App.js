@@ -10,7 +10,6 @@ import Zpmember from './components/Zpmember';
 import Blockincharge from './components/Blockincharge';
 import Survey from './components/Survey';
 import Block from './components/Block';
-import AddScheme from './components/Addscheme';
 
 const App = () => {
   const [theme, setTheme] = useState('corporate');
@@ -51,7 +50,7 @@ const App = () => {
             <Route path="/users/block-incharge" element={<Blockincharge />} />
             <Route path="/report/survey" element={<Survey />} />
             <Route path="/report/block" element={<Block />} />
-            <Route path="/add-scheme" element={<AddScheme />} />
+
 
           </Routes>
         </div>
