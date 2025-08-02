@@ -40,7 +40,7 @@ const App = () => {
 
 
         {/* Main Content Area with top margin */}
-        <div className="ml-20 lg:ml-72 pt-16 sm:pt-20 md:pt-24 lg:pt-24 p-6">
+        <div className="ml-20 lg:ml-72 pt-20 md:pt-20 lg:pt-20 p-0 md:p-2 lg:p-2">
           <Routes>
             <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/scheme" element={<Scheme />} />
