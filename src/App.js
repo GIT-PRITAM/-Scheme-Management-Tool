@@ -20,7 +20,7 @@ const App = () => {
   };
 
   return (
-    <div data-theme={theme} className="min-h-screen relative">
+    <div data-theme={theme} className="min-h-screen overflow-y-auto">
       <Router>
         <Sidebar />
 
