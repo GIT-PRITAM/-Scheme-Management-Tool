@@ -3,11 +3,13 @@ import AddAssetModal from './AddAssetModal';
 
 const Assets = () => {
     const [modalOpen, setModalOpen] = useState(false);
+
     const [assets, setAssets] = useState([
         { name: 'Asset #1', category: 'Equipment', condition: 'Good' },
         { name: 'Asset #2', category: 'Machinery', condition: 'Average' },
     ]);
 
+    //will check
     const handleAddAsset = (newAsset) => {
         setAssets([...assets, newAsset]);
     };

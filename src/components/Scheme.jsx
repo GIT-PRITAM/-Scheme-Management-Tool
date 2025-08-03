@@ -1,5 +1,6 @@
 import { useState } from "react";
 import AddSchemeModal from "./AddSchemeModal";
+
 const Scheme = () => {
     const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -19,7 +20,7 @@ const Scheme = () => {
         },
     ]);
 
-    // Handle form submission
+    // Handle form submission (will check)
     const handleFormSubmit = (data) => {
         setSchemes((prevSchemes) => [...prevSchemes, data]);
         setIsModalOpen(false);
