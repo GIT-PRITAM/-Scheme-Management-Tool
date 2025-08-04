@@ -35,13 +35,16 @@ const AddAssetModal = ({ isOpen, onClose, onAdd }) => {
                     initial="hidden"
                     animate="visible"
                     exit="exit"
+                    aria-modal="true"
+                    role="dialog"
                 >
                     <motion.div
-                        className="bg-base-100 rounded-xl shadow-xl p-8 w-full max-w-5xl"
+                        className="bg-base-100 rounded-xl shadow-xl p-8 w-full max-w-5xl max-h-[90vh] overflow-y-auto"
                         variants={modalVariant}
                         initial="hidden"
                         animate="visible"
                         exit="exit"
+
                     >
                         <h3
                             className="text-2xl font-bold mb-6"
