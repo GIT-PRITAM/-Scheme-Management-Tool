@@ -8,8 +8,10 @@
     "@testing-library/jest-dom": "^6.6.4",
     "@testing-library/react": "^16.3.0",
     "@testing-library/user-event": "^13.5.0",
+    "chart.js": "^4.5.0",
     "framer-motion": "^12.23.12",
     "react": "^19.1.1",
+    "react-chartjs-2": "^5.3.0",
     "react-dom": "^19.1.1",
     "react-router-dom": "^7.7.1",
     "react-scripts": "5.0.1",
@@ -40,9 +42,12 @@
     ]
   },
   "devDependencies": {
+    "@types/react": "^19.1.9",
+    "@types/react-dom": "^19.1.7",
     "autoprefixer": "^10.4.21",
     "daisyui": "^4.12.24",
     "postcss": "^8.5.6",
-    "tailwindcss": "^3.4.17"
+    "tailwindcss": "^3.4.17",
+    "typescript": "^5.9.2"
   }
 }
