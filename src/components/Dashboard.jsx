@@ -3,7 +3,10 @@ import {
     PlusIcon,
     PlayIcon,
     StopIcon,
-    ArrowTrendingUpIcon,
+    ClipboardDocumentIcon,
+    CubeIcon,
+    DocumentCheckIcon,
+    ExclamationCircleIcon,
 } from '@heroicons/react/24/solid';
 import { ArcElement, Chart as ChartJS, Tooltip, Legend } from 'chart.js';
 import { Doughnut } from 'react-chartjs-2';
@@ -11,18 +14,22 @@ import { Doughnut } from 'react-chartjs-2';
 ChartJS.register(ArcElement, Tooltip, Legend);
 
 // Reusable StatCard component
-const StatCard = ({ title, value, subtitle, color }) => (
-    <div className={`p-4 rounded-xl shadow text-white ${color} relative`}>
-        <div className="flex justify-between items-center">
-            <div>
-                <p className="text-sm font-semibold">{title}</p>
-                <h2 className="text-3xl font-bold">{value}</h2>
-                <p className="text-xs mt-1">{subtitle}</p>
+const StatCard = ({ title, value, color, Icon, iconColor }) => (
+    <div className={`p-4 rounded-xl shadow text-white ${color}`}>
+        <div className="flex items-center gap-4">
+            {/* Icon in a white circle with custom icon color */}
+            <div className="bg-white rounded-full p-2">
+                <Icon className={`h-8 w-8 ${iconColor}`} />
             </div>
-            <ArrowTrendingUpIcon className="h-6 w-6" />
+            {/* Title & Value */}
+            <div className='ml-4'>
+                <p className="text-sm text-center font-semibold">{title}</p>
+                <h2 className="text-3xl mt-2 font-bold">{value}</h2>
+            </div>
         </div>
     </div>
 );
+
 
 const Dashboard = () => {
     return (
@@ -37,11 +44,36 @@ const Dashboard = () => {
 
             {/* Scheme Stats */}
             <div className="grid grid-cols-4 gap-4">
-                <StatCard title="Total Schemes" value="24" subtitle="Increased from last month" color="bg-blue-600" />
-                <StatCard title="Ended Schemes" value="10" subtitle="Increased from last month" color="bg-blue-600" />
-                <StatCard title="Running Schemes" value="12" subtitle="Increased from last month" color="bg-blue-600" />
-                <StatCard title="Pending Schemes" value="2" subtitle="On Discuss" color="bg-blue-600" />
+                <StatCard
+                    title="Total Schemes"
+                    value="224"
+                    color="bg-blue-600"
+                    Icon={ClipboardDocumentIcon}
+                    iconColor="text-blue-500"
+                />
+                <StatCard
+                    title="Assets Registered"
+                    value="435"
+                    color="bg-blue-600"
+                    Icon={CubeIcon}
+                    iconColor="text-blue-500"
+                />
+                <StatCard
+                    title="Work Orders Issued"
+                    value="128"
+                    color="bg-blue-600"
+                    Icon={DocumentCheckIcon}
+                    iconColor="text-green-500"
+                />
+                <StatCard
+                    title="Pending Approvals"
+                    value="15"
+                    color="bg-blue-600"
+                    Icon={ExclamationCircleIcon}
+                    iconColor="text-red-500"
+                />
             </div>
+
 
             {/* Middle Row */}
             <div className="grid grid-cols-2 gap-4">
@@ -51,7 +83,7 @@ const Dashboard = () => {
                     <div className="w-48 mx-auto relative">
                         <Doughnut
                             data={{
-                                labels: ['Used', 'Free', 'Other'],
+                                labels: ['Completed', 'In Progress', 'Pending'],
                                 datasets: [{
                                     data: [60, 30, 10],
                                     backgroundColor: ['#1D4ED8', '#FFED29', '#e32417'],
@@ -67,7 +99,7 @@ const Dashboard = () => {
                         />
                         <div className="absolute top-[55%] left-[50%] transform -translate-x-1/2 -translate-y-1/2 text-2xl font-bold">
                             41%
-                            <div className="text-sm font-normal ">Scheme Ended</div>
+                            <div className="text-sm font-normal">Scheme Ended</div>
                         </div>
                     </div>
                     <div className="flex justify-center mt-4 gap-6 text-sm">
