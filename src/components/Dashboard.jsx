@@ -8,10 +8,18 @@ import {
     DocumentCheckIcon,
     ExclamationCircleIcon,
 } from '@heroicons/react/24/solid';
-import { ArcElement, Chart as ChartJS, Tooltip, Legend } from 'chart.js';
-import { Doughnut } from 'react-chartjs-2';
+import {
+    ArcElement,
+    Chart as ChartJS,
+    Tooltip,
+    Legend,
+    CategoryScale,
+    LinearScale,
+    BarElement,
+} from 'chart.js';
+import { Doughnut, Bar } from 'react-chartjs-2';
 
-ChartJS.register(ArcElement, Tooltip, Legend);
+ChartJS.register(ArcElement, Tooltip, Legend, CategoryScale, LinearScale, BarElement);
 
 // Reusable StatCard component
 const StatCard = ({ title, value, color, Icon, iconColor }) => (
@@ -30,8 +38,46 @@ const StatCard = ({ title, value, color, Icon, iconColor }) => (
     </div>
 );
 
-
 const Dashboard = () => {
+    // Bar chart data
+    const barData = {
+        labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+        datasets: [
+            {
+                label: 'Work Completed',
+                data: [12, 19, 10, 15, 22, 30, 25, 28, 20, 18, 24, 26],
+                backgroundColor: '#1D4ED8', // Tailwind blue-700
+                borderRadius: 6,
+            },
+            {
+                label: 'Work Pending',
+                data: [5, 8, 6, 4, 7, 10, 8, 6, 5, 7, 6, 5],
+                backgroundColor: '#e32417', // Custom red
+                borderRadius: 6,
+            },
+        ],
+    };
+
+    const barOptions = {
+        responsive: true,
+        plugins: {
+            legend: {
+                position: 'top',
+                labels: { color: '#1E3A8A' },
+            },
+        },
+        scales: {
+            x: {
+                ticks: { color: '#1E3A8A' },
+                grid: { display: false },
+            },
+            y: {
+                ticks: { color: '#1E3A8A' },
+                grid: { color: '#E5E7EB' },
+            },
+        },
+    };
+
     return (
         <div className="p-6 w-full min-h-screen text-blue-900 space-y-6">
             {/* Header */}
@@ -74,7 +120,6 @@ const Dashboard = () => {
                 />
             </div>
 
-
             {/* Middle Row */}
             <div className="grid grid-cols-2 gap-4">
                 {/* Scheme Progress */}
@@ -109,18 +154,10 @@ const Dashboard = () => {
                     </div>
                 </div>
 
-                {/* Team Collaboration */}
+                {/* Month-wise Work History Bar Chart */}
                 <div className="bg-white p-4 rounded-xl shadow">
-                    <div className="flex justify-between items-center mb-4">
-                        <h2 className="font-semibold">Team Collaboration</h2>
-                        <button className="text-blue-600 border border-blue-600 px-2 py-1 rounded-full text-sm">+ Add Member</button>
-                    </div>
-                    <ul className="space-y-2 text-sm">
-                        <li><b>Alexandra Deff</b> - <span className="text-green-600">Completed</span></li>
-                        <li><b>Edwin Adenike</b> - <span className="text-yellow-500">In Progress</span></li>
-                        <li><b>Isaac Oluwatemilorun</b> - <span className="text-red-500">Pending</span></li>
-                        <li><b>David Oshodi</b> - <span className="text-yellow-500">In Progress</span></li>
-                    </ul>
+                    <h2 className="font-semibold mb-4">Work History</h2>
+                    <Bar data={barData} options={barOptions} />
                 </div>
             </div>
 
