@@ -25,12 +25,10 @@ ChartJS.register(ArcElement, Tooltip, Legend, CategoryScale, LinearScale, BarEle
 const StatCard = ({ title, value, color, Icon, iconColor }) => (
     <div className={`p-4 rounded-xl shadow text-white ${color}`}>
         <div className="flex items-center gap-4">
-            {/* Icon in a white circle with custom icon color */}
-            <div className="bg-white rounded-full p-2">
+            <div className="bg-base-100 rounded-full p-2">
                 <Icon className={`h-8 w-8 ${iconColor}`} />
             </div>
-            {/* Title & Value */}
-            <div className='ml-4'>
+            <div className="ml-4">
                 <p className="text-sm text-center font-semibold">{title}</p>
                 <h2 className="text-3xl mt-2 font-bold">{value}</h2>
             </div>
@@ -39,6 +37,12 @@ const StatCard = ({ title, value, color, Icon, iconColor }) => (
 );
 
 const Dashboard = () => {
+    // Detect dark mode
+    const isDark =
+        typeof document !== 'undefined' &&
+        document.documentElement.classList.contains('dark');
+    const chartTextColor = isDark ? '#ffffff' : '#000000';
+
     // Bar chart data
     const barData = {
         labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
@@ -46,13 +50,13 @@ const Dashboard = () => {
             {
                 label: 'Work Completed',
                 data: [12, 19, 10, 15, 22, 30, 25, 28, 20, 18, 24, 26],
-                backgroundColor: '#1D4ED8', // Tailwind blue-700
+                backgroundColor: '#1D4ED8', // blue-700
                 borderRadius: 6,
             },
             {
                 label: 'Work Pending',
                 data: [5, 8, 6, 4, 7, 10, 8, 6, 5, 7, 6, 5],
-                backgroundColor: '#e32417', // Custom red
+                backgroundColor: '#e32417', // red
                 borderRadius: 6,
             },
         ],
@@ -63,23 +67,23 @@ const Dashboard = () => {
         plugins: {
             legend: {
                 position: 'top',
-                labels: { color: '#1E3A8A' },
+                labels: { color: chartTextColor },
             },
         },
         scales: {
             x: {
-                ticks: { color: '#1E3A8A' },
+                ticks: { color: chartTextColor },
                 grid: { display: false },
             },
             y: {
-                ticks: { color: '#1E3A8A' },
-                grid: { color: '#E5E7EB' },
+                ticks: { color: chartTextColor },
+                grid: { color: isDark ? '#374151' : '#E5E7EB' },
             },
         },
     };
 
     return (
-        <div className="p-6 w-full min-h-screen text-blue-900 space-y-6">
+        <div className="p-6 w-full min-h-screen bg-base-200 text-base-content space-y-6">
             {/* Header */}
             <div className="flex justify-between items-center">
                 <h1 className="text-3xl font-bold">Dashboard</h1>
@@ -89,7 +93,7 @@ const Dashboard = () => {
             </div>
 
             {/* Scheme Stats */}
-            <div className="grid grid-cols-4 gap-4">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
                 <StatCard
                     title="Total Schemes"
                     value="224"
@@ -121,9 +125,9 @@ const Dashboard = () => {
             </div>
 
             {/* Middle Row */}
-            <div className="grid grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
                 {/* Scheme Progress */}
-                <div className="bg-white p-4 rounded-xl shadow text-center relative">
+                <div className="bg-base-100 p-4 rounded-xl shadow text-center relative">
                     <h2 className="font-semibold mb-4">Scheme Progress</h2>
                     <div className="w-48 mx-auto relative">
                         <Doughnut
@@ -148,23 +152,23 @@ const Dashboard = () => {
                         </div>
                     </div>
                     <div className="flex justify-center mt-4 gap-6 text-sm">
-                        <div className="flex items-center gap-1"><span className="w-3 h-3 rounded-full bg-blue-700"></span> Completed</div>
-                        <div className="flex items-center gap-1"><span className="w-3 h-3 rounded-full bg-[#FFED29]"></span> In Progress</div>
-                        <div className="flex items-center gap-1"><span className="w-3 h-3 rounded-full bg-[#e32417]"></span> Pending</div>
+                        <div className="flex items-center gap-1 dark:text-white"><span className="w-3 h-3 rounded-full bg-blue-700"></span> Completed</div>
+                        <div className="flex items-center gap-1 dark:text-white"><span className="w-3 h-3 rounded-full bg-[#FFED29]"></span> In Progress</div>
+                        <div className="flex items-center gap-1 dark:text-white"><span className="w-3 h-3 rounded-full bg-[#e32417]"></span> Pending</div>
                     </div>
                 </div>
 
-                {/* Month-wise Work History Bar Chart */}
-                <div className="bg-white p-4 rounded-xl shadow">
+                {/* Work History */}
+                <div className="bg-base-100 p-4 rounded-xl shadow">
                     <h2 className="font-semibold mb-4">Work History</h2>
                     <Bar data={barData} options={barOptions} />
                 </div>
             </div>
 
             {/* Bottom Row */}
-            <div className="grid grid-cols-4 gap-4">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
                 {/* Scheme Analytics */}
-                <div className="col-span-1 bg-white p-4 rounded-xl shadow">
+                <div className="col-span-1 bg-base-100 p-4 rounded-xl shadow">
                     <h2 className="font-semibold mb-4">Scheme Analytics</h2>
                     <div className="flex justify-between items-end h-24">
                         {['S', 'M', 'T', 'W', 'T', 'F', 'S'].map((day, i) => (
@@ -177,7 +181,7 @@ const Dashboard = () => {
                 </div>
 
                 {/* Reminder */}
-                <div className="bg-white p-4 rounded-xl shadow">
+                <div className="bg-base-100 p-4 rounded-xl shadow">
                     <h2 className="font-semibold mb-4">Reminders</h2>
                     <p>Meeting with Arc Company</p>
                     <p className="text-sm text-blue-600">Time: 02:00 pm - 04:00 pm</p>
@@ -187,7 +191,7 @@ const Dashboard = () => {
                 </div>
 
                 {/* Scheme List */}
-                <div className="bg-white p-4 rounded-xl shadow">
+                <div className="bg-base-100 p-4 rounded-xl shadow">
                     <h2 className="font-semibold mb-4">Schemes</h2>
                     <ul className="space-y-2 text-sm">
                         {[
@@ -197,13 +201,13 @@ const Dashboard = () => {
                             'Optimize Page Load',
                             'Cross-Browser Testing',
                         ].map((scheme, i) => (
-                            <li key={i} className="border-b pb-1">{scheme}</li>
+                            <li key={i} className="border-b border-base-300 pb-1">{scheme}</li>
                         ))}
                     </ul>
                 </div>
 
                 {/* Time Tracker */}
-                <div className="bg-white p-4 rounded-xl shadow text-center">
+                <div className="bg-base-100 p-4 rounded-xl shadow text-center">
                     <h2 className="font-semibold mb-4">Time Tracker</h2>
                     <div className="text-2xl font-bold mb-2">01:24:08</div>
                     <div className="flex justify-center gap-4">
