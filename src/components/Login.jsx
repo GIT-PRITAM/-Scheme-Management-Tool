@@ -71,7 +71,7 @@ const Login = ({ onLogin }) => {
                     {/* Signup Link */}
                     <p className="text-center text-sm mt-2">
                         Don't have an account?{" "}
-                        <a href="/signup" className="link link-primary">
+                        <a href="/" className="link link-primary">
                             Sign up here
                         </a>
                     </p>
