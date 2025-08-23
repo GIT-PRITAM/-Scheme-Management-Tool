@@ -20,7 +20,7 @@ const Sidebar = () => {
     const [isReportOpen, setIsReportOpen] = useState(false);
 
     return (
-        <aside className="fixed top-16 left-0 h-full w-20 lg:w-72 bg-base-200 text-base-content shadow-lg z-50 transition-all duration-300 overflow-y-auto">
+        <aside className="fixed top-0 left-0 h-full w-20 lg:w-72 bg-base-200 text-base-content shadow-lg z-50 transition-all duration-300 overflow-y-auto">
             <nav className="p-4 space-y-2">
 
                 {/* Dashboard */}

@@ -1,62 +1,145 @@
-import React, { useState } from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import Sidebar from './components/Sidebar';
-import Dashboard from './components/Dashboard';
-import Scheme from './components/Scheme';
-import Assets from './components/Assets';
-import Questions from './components/Questions';
-import Engineer from './components/Engineer';
-import Zpmember from './components/Zpmember';
-import Blockincharge from './components/Blockincharge';
-import Survey from './components/Survey';
-import Block from './components/Block';
+import React, { useState } from "react";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Login from "./components/Login";
+import Signup from "./components/Signup";
+import Dashboard from "./components/Dashboard"; // example private page
+import ProtectedRoute from "./components/ProtectedRoute";
+import Sidebar from "./components/Sidebar";
+import Scheme from "./components/Scheme";
+import Assets from "./components/Assets";
+import Questions from "./components/Questions";
+import Engineer from "./components/Engineer";
+import Zpmember from "./components/Zpmember";
+import Blockincharge from "./components/Blockincharge";
+import Survey from "./components/Survey";
+import Block from "./components/Block";
 
-const App = () => {
-  const [theme, setTheme] = useState('corporate');
+function App() {
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
 
-  const toggleTheme = () => {
-    setTheme((prev) => (prev === 'corporate' ? 'dim' : 'corporate'));
+  // Login handler
+  const handleLogin = (data) => {
+    console.log("Login Success:", data);
+    setIsAuthenticated(true);
+  };
+
+  // Signup handler
+  const handleSignup = (data) => {
+    console.log("Signup Success:", data);
+    setIsAuthenticated(true);
   };
 
   return (
-    <div data-theme={theme} className="min-h-screen overflow-y-auto">
-      <Router>
-        <Sidebar />
+    <Router>
+      <div className="flex">
+        {/* Show sidebar only after login */}
+        {isAuthenticated && <Sidebar />}
 
-        <nav className="navbar bg-base-100 shadow-md fixed top-0 left-0 right-0 z-50">
-          <div className="container mx-auto flex justify-between items-center px-4">
-            <div className="text-lg font-bold text-primary">App Name</div>
-            <div className="flex items-center gap-4">
-              <button
-                onClick={toggleTheme}
-                className="btn btn-sm btn-outline btn-primary"
-              >
-                Switch to {theme === 'corporate' ? 'Dark' : 'Light'} Theme
-              </button>
-            </div>
-          </div>
-        </nav>
-
-
-        {/* Main Content Area with top margin */}
-        <div className="ml-20 lg:ml-72 pt-20 md:pt-20 lg:pt-20 p-0 md:p-2 lg:p-2">
+        <div className="flex-1">
           <Routes>
-            <Route path="/dashboard" element={<Dashboard />} />
-            <Route path="/scheme" element={<Scheme />} />
-            <Route path="/assets" element={<Assets />} />
-            <Route path="/questions" element={<Questions />} />
-            <Route path="/users/engineer" element={<Engineer />} />
-            <Route path="/users/zpmember" element={<Zpmember />} />
-            <Route path="/users/block-incharge" element={<Blockincharge />} />
-            <Route path="/report/survey" element={<Survey />} />
-            <Route path="/report/block" element={<Block />} />
+            {/* Public Routes */}
+            <Route path="/login" element={<Login onLogin={handleLogin} />} />
+            <Route path="/" element={<Signup onSignup={handleSignup} />} />
 
+            {/* Private Routes */}
+
+            <Route
+              path="/dashboard"
+              element={
+                <ProtectedRoute isAuthenticated={isAuthenticated}>
+                  <div className="ml-20 lg:ml-72">
+                    <Dashboard />
+                  </div>
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/scheme"
+              element={
+                <ProtectedRoute isAuthenticated={isAuthenticated}>
+                  <div className="ml-20 lg:ml-72">
+                    <Scheme />
+                  </div>
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/assets"
+              element={
+                <ProtectedRoute isAuthenticated={isAuthenticated}>
+                  <div className="ml-20 lg:ml-72">
+                    <Assets />
+                  </div>
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/questions"
+              element={
+                <ProtectedRoute isAuthenticated={isAuthenticated}>
+                  <div className="ml-20 lg:ml-72">
+                    <Questions />
+                  </div>
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/users/engineer"
+              element={
+                <ProtectedRoute isAuthenticated={isAuthenticated}>
+                  <div className="ml-20 lg:ml-72">
+                    <Engineer />
+                  </div>
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/users/zpmember"
+              element={
+                <ProtectedRoute isAuthenticated={isAuthenticated}>
+                  <div className="ml-20 lg:ml-72">
+                    <Zpmember />
+                  </div>
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/users/block-incharge"
+              element={
+                <ProtectedRoute isAuthenticated={isAuthenticated}>
+                  <div className="ml-20 lg:ml-72">
+                    <Blockincharge />
+                  </div>
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/report/survey"
+              element={
+                <ProtectedRoute isAuthenticated={isAuthenticated}>
+                  <div className="ml-20 lg:ml-72">
+                    <Survey />
+                  </div>
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/report/block"
+              element={
+                <ProtectedRoute isAuthenticated={isAuthenticated}>
+                  <div className="ml-20 lg:ml-72">
+                    <Block />
+                  </div>
+                </ProtectedRoute>
+              }
+            />
 
           </Routes>
         </div>
-      </Router>
-    </div>
+      </div>
+    </Router>
   );
-};
+}
 
 export default App;
+

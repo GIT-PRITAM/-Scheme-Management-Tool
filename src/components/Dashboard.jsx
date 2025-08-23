@@ -50,13 +50,13 @@ const Dashboard = () => {
             {
                 label: 'Work Completed',
                 data: [12, 19, 10, 15, 22, 30, 25, 28, 20, 18, 24, 26],
-                backgroundColor: '#1D4ED8', // blue-700
+                backgroundColor: '#1D4ED8',
                 borderRadius: 6,
             },
             {
                 label: 'Work Pending',
                 data: [5, 8, 6, 4, 7, 10, 8, 6, 5, 7, 6, 5],
-                backgroundColor: '#e32417', // red
+                backgroundColor: '#e32417',
                 borderRadius: 6,
             },
         ],
@@ -67,16 +67,16 @@ const Dashboard = () => {
         plugins: {
             legend: {
                 position: 'top',
-                labels: { color: chartTextColor },
+                labels: { color: chartTextColor }, // legend text color
             },
         },
         scales: {
             x: {
-                ticks: { color: chartTextColor },
+                ticks: { color: chartTextColor }, // X-axis labels
                 grid: { display: false },
             },
             y: {
-                ticks: { color: chartTextColor },
+                ticks: { color: chartTextColor }, // Y-axis labels
                 grid: { color: isDark ? '#374151' : '#E5E7EB' },
             },
         },
@@ -160,7 +160,7 @@ const Dashboard = () => {
 
                 {/* Work History */}
                 <div className="bg-base-100 p-4 rounded-xl shadow">
-                    <h2 className="font-semibold mb-4">Work History</h2>
+                    <h2 className="font-semibold mb-4 dark:text-white">Work History</h2>
                     <Bar data={barData} options={barOptions} />
                 </div>
             </div>
